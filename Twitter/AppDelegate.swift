@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             // Go to tweets timeline screen
             println("didFinishLaunchingWithOptions: Current user detected: \(User.currentUser?.name)")
-            var vc = self.storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
+            var vc = self.storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationViewController") as UIViewController
             window?.rootViewController = vc
         }
         return true

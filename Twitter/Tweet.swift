@@ -15,6 +15,34 @@ class Tweet: NSObject {
     var createdAtString: String?
     var createdAt: NSDate?
     
+    var secondsCreated: Double? {
+        if self.createdAt != nil {
+            return -self.createdAt!.timeIntervalSinceNow
+        }
+        return nil
+    }
+    
+    var timeLapsedCreatedString: String {
+        if var seconds = self.secondsCreated {
+            var days = Int(seconds / 3600.0 / 24.0)
+            if days > 7 {
+                var formatter = NSDateFormatter()
+                formatter.dateFormat = "M/d/yy"
+                return formatter.stringFromDate(self.createdAt!)
+            }
+            if days >= 1 {
+                return "\(days)d"
+            }
+            var hours = Int(seconds / 3600.0)
+            if hours >= 1 {
+                return "\(hours)h"
+            }
+            var minutes = Int(seconds / 60.0)
+            return "\(minutes)m"
+        }
+        return ""
+    }
+    
     init(dictionary: NSDictionary) {
         self.user = User(dictionary: dictionary["user"] as NSDictionary)
         self.text = dictionary["text"] as? String
