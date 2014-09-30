@@ -35,6 +35,9 @@ class TweetViewController: UIViewController {
         var formatter = NSDateFormatter()
         formatter.dateFormat = "M/d/yy hh:mm:ss a"
         self.timestampLabel.text = formatter.stringFromDate(tweet!.createdAt!)
+        
+        self.refreshRetweetButton()
+        self.refreshFavoriteButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +46,7 @@ class TweetViewController: UIViewController {
     }
     
 
-    func refreshRetweenButton() {
+    func refreshRetweetButton() {
         if self.tweet?.retweeted ?? false {
             self.retweetButton.setImage(UIImage(named: "retweeted"), forState: .Normal)
         } else {
@@ -54,7 +57,7 @@ class TweetViewController: UIViewController {
 
     @IBAction func toggleRetweet(sender: AnyObject) {
         self.tweet?.retweeted = !(self.tweet?.retweeted ?? false)
-        self.refreshRetweenButton()
+        self.refreshRetweetButton()
     }
 
     func refreshFavoriteButton() {
