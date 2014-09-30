@@ -11,6 +11,7 @@ import UIKit
 class Tweet: NSObject {
    
     var user: User?
+    var statusId: String?
     var text: String?
     var createdAtString: String?
     var createdAt: NSDate?
@@ -47,6 +48,7 @@ class Tweet: NSObject {
     
     init(dictionary: NSDictionary) {
         self.user = User(dictionary: dictionary["user"] as NSDictionary)
+        self.statusId = dictionary["id_str"] as? String
         self.text = dictionary["text"] as? String
         self.createdAtString = dictionary["created_at"] as? String
         var formatter = NSDateFormatter()

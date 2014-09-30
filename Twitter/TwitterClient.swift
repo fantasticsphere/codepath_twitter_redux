@@ -48,6 +48,50 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         })
     }
     
+    func updateWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("update: \(response)")
+            var tweet = Tweet(dictionary: response as NSDictionary)
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to create tweet")
+                completion(tweet: nil, error: error)
+        })
+    }
+
+    func retweetWithParams(tweet: Tweet, params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("/1.1/statuses/retweet/\(tweet.statusId!).json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("update: \(response)")
+            var tweet = Tweet(dictionary: response as NSDictionary)
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to retweet")
+                completion(tweet: nil, error: error)
+        })
+    }
+    
+    func favoriteWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("/1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("update: \(response)")
+            var tweet = Tweet(dictionary: response as NSDictionary)
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to favorite tweet")
+                completion(tweet: nil, error: error)
+        })
+    }
+
+    func unfavoriteWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        self.POST("/1.1/favorites/destroy.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("update: \(response)")
+            var tweet = Tweet(dictionary: response as NSDictionary)
+            completion(tweet: tweet, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to unfavorite tweet")
+                completion(tweet: nil, error: error)
+        })
+    }
+    
     func openURL(url: NSURL) {
         self.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuthToken(queryString: url.query), success: { (accessToken: BDBOAuthToken!) -> Void in
             println("Got the access token: \(accessToken)")

@@ -11,6 +11,7 @@ import UIKit
 class ReplyViewController: UIViewController {
 
     var recipient: User?
+    var originalTweet: Tweet?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var replyTextView: UITextView!
@@ -23,6 +24,7 @@ class ReplyViewController: UIViewController {
         // Do any additional setup after loading the view.
         replyTextView.layer.borderWidth = 1.0
         replyTextView.layer.borderColor = UIColor.grayColor().CGColor
+        replyTextView.text = "@\(recipient!.screenName!) "
         
         self.automaticallyAdjustsScrollViewInsets = false
     }
@@ -32,6 +34,14 @@ class ReplyViewController: UIViewController {
     }
     
     @IBAction func doSend(sender: AnyObject) {
+        if !replyTextView.text.isEmpty {
+            TwitterClient.sharedInstance.updateWithParams(["status": replyTextView.text, "in_reply_to_status_id": self.originalTweet!.statusId], completion: { (tweet, error) -> () in
+                if tweet != nil {
+                    println("Replied: \(tweet)")
+                }
+            })
+
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     

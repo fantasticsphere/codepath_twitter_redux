@@ -56,8 +56,19 @@ class TweetViewController: UIViewController {
     }
 
     @IBAction func toggleRetweet(sender: AnyObject) {
-        self.tweet?.retweeted = !(self.tweet?.retweeted ?? false)
-        self.refreshRetweetButton()
+        var newValue = !(self.tweet?.retweeted ?? false)
+        if newValue {
+            self.tweet?.retweeted = !(self.tweet?.retweeted ?? false)
+            self.refreshRetweetButton()
+            TwitterClient.sharedInstance.retweetWithParams(self.tweet!, params: ["id": tweet!.statusId!], completion: { (tweet, error) -> () in
+                if tweet != nil {
+                    println("Successfully retweet: \(tweet!.statusId!)")
+                } else {
+                    self.tweet?.retweeted = !newValue
+                    self.refreshRetweetButton()
+                }
+            })
+        }
     }
 
     func refreshFavoriteButton() {
@@ -69,8 +80,29 @@ class TweetViewController: UIViewController {
     }
 
     @IBAction func toggleFavorite(sender: AnyObject) {
-        self.tweet?.favorited = !(self.tweet?.favorited ?? false)
+        var newValue = !(self.tweet?.favorited ?? false)
+        self.tweet?.favorited = newValue
         self.refreshFavoriteButton()
+        if newValue {
+            TwitterClient.sharedInstance.favoriteWithParams(["id": self.tweet!.statusId!], completion: { (tweet, error) -> () in
+                if tweet != nil {
+                    println("Successfully favorite tweet: \(tweet!.statusId!)")
+                } else {
+                    self.tweet?.favorited = !newValue
+                    self.refreshFavoriteButton()
+                }
+            })
+        } else {
+            TwitterClient.sharedInstance.unfavoriteWithParams(["id": self.tweet!.statusId!], completion: { (tweet, error) -> () in
+                if tweet != nil {
+                    println("Successfully unfavorite tweet: \(tweet!.statusId!)")
+                } else {
+                    self.tweet?.favorited = !newValue
+                    self.refreshFavoriteButton()
+                }
+            })
+            
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -78,6 +110,7 @@ class TweetViewController: UIViewController {
             var replyNavigationController = segue.destinationViewController as UINavigationController
             var replyViewController = replyNavigationController.viewControllers[0] as ReplyViewController
             replyViewController.recipient = self.tweet?.user
+            replyViewController.originalTweet = self.tweet
         }
     }
     

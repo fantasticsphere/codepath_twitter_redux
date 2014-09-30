@@ -32,6 +32,13 @@ class NewTweetViewController: UIViewController {
     }
 
     @IBAction func onDone(sender: AnyObject) {
+        if !tweetTextView.text.isEmpty {
+            TwitterClient.sharedInstance.updateWithParams(["status": tweetTextView.text], completion: { (tweet, error) -> () in
+                if tweet != nil {
+                    println("Created tweet: \(tweet)")
+                }
+            })
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
