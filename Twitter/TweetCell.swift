@@ -10,6 +10,8 @@ import UIKit
 
 class TweetCell: UITableViewCell {
 
+    var tweet: Tweet?
+    
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!

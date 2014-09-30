@@ -53,6 +53,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetCell
         var tweet = self.tweets?[indexPath.row]
+        cell.tweet = tweet
         if var user = tweet?.user {
             if user.profileImageUrl != nil {
                 cell.thumbnailView.setImageWithURL(NSURL(string: user.profileImageUrl!))
@@ -86,14 +87,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         User.currentUser?.logout()
     }
 
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "tweetSegue" {
+            if var cell = sender as? TweetCell {
+                var tweetNavigationController = segue.destinationViewController as UINavigationController
+                var tweetViewController = tweetNavigationController.viewControllers[0] as TweetViewController
+                tweetViewController.tweet = cell.tweet
+            }
+            
+        }
     }
-    */
 
 }
