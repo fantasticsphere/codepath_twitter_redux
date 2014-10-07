@@ -47,6 +47,28 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             completion(tweets: nil, error: error)
         })
     }
+
+    func userTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        self.GET("1.1/statuses/user_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("user timeline: \(response)")
+            var tweets = Tweet.tweetWithArray(response as [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to retrieve user timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+
+    func mentionsTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        self.GET("1.1/statuses/mentions_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            //println("mentions timeline: \(response)")
+            var tweets = Tweet.tweetWithArray(response as [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("Failed to retrieve mentions timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
     
     func updateWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
         self.POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in

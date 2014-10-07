@@ -20,8 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             // Go to tweets timeline screen
             println("didFinishLaunchingWithOptions: Current user detected: \(User.currentUser?.name)")
-            var vc = self.storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationViewController") as UIViewController
-            window?.rootViewController = vc
+
+            var leftDrawer = self.storyboard.instantiateViewControllerWithIdentifier("drawerMenuViewController") as UIViewController
+            var tweetsController = self.storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationViewController") as UIViewController
+            var drawerController = MMDrawerController(centerViewController: tweetsController, leftDrawerViewController: leftDrawer)
+
+            drawerController.restorationIdentifier = "MMDrawer"
+            drawerController.maximumLeftDrawerWidth = 200.0
+            drawerController.openDrawerGestureModeMask = .All
+            drawerController.closeDrawerGestureModeMask = .All
+
+            window?.rootViewController = drawerController
         }
         return true
     }

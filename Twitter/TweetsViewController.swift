@@ -9,6 +9,11 @@
 import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    enum TweetsFilterType {
+        case HomeTimeline
+        case Mentions
+    }
+    var tweetsFilter: TweetsFilterType = .HomeTimeline
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl? = UIRefreshControl()
     
@@ -29,17 +34,26 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadTweetsFromSource() {
-        TwitterClient.sharedInstance.homeTimelineWithParams(["count": 20], completion: { (tweets, error) -> () in
-            self.tweets = tweets
-            if tweets != nil {
-                for tweet in tweets! {
-                    //println("tweet: \(tweet.text)")
+        switch self.tweetsFilter {
+        case .HomeTimeline:
+            TwitterClient.sharedInstance.homeTimelineWithParams(["count": 20], completion: { (tweets, error) -> () in
+                self.tweets = tweets
+                if tweets != nil {
+                    println("Updated \(tweets!.count) rows")
+                    self.tweetsTableView.reloadData()
                 }
-                println("Updated \(tweets!.count) rows")
-                self.tweetsTableView.reloadData()
-            }
-            self.refreshControl!.endRefreshing()
-        })
+                self.refreshControl!.endRefreshing()
+            })
+        case .Mentions:
+            TwitterClient.sharedInstance.mentionsTimelineWithParams(["count": 20], completion: { (tweets, error) -> () in
+                self.tweets = tweets
+                if tweets != nil {
+                    println("Updated \(tweets!.count) rows")
+                    self.tweetsTableView.reloadData()
+                }
+                self.refreshControl!.endRefreshing()
+            })
+        }
     }
 
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -53,29 +67,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetCell
         var tweet = self.tweets?[indexPath.row]
-        cell.tweet = tweet
-        if var user = tweet?.user {
-            if user.profileImageUrl != nil {
-                cell.thumbnailView.setImageWithURL(NSURL(string: user.profileImageUrl!))
-            }
-            if user.name != nil {
-                cell.nameLabel.text = user.name!
-            } else {
-                cell.nameLabel.text = ""
-            }
-            if user.screenName != nil {
-                cell.screenNameLabel.text = "@\(user.screenName!)"
-            } else {
-                cell.screenNameLabel.text = ""
-            }
-        }
-        if tweet?.text != nil {
-            cell.tweetTextLabel.text = tweet?.text!
-        } else {
-            cell.tweetTextLabel.text = ""
-        }
-        cell.timeLapsedLabel.text = tweet?.timeLapsedCreatedString
-        
+        cell.updateCellWithTweet(tweet)
         return cell
     }
     override func didReceiveMemoryWarning() {
@@ -87,6 +79,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         User.currentUser?.logout()
     }
 
+    @IBAction func onLeftDrawerToggle(sender: AnyObject) {
+        self.mm_drawerController.toggleDrawerSide(.Left, animated: true, completion: nil)
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.

@@ -22,6 +22,10 @@
 		F29DCB3619DA7E9500A53F05 /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DCB3519DA7E9500A53F05 /* NewTweetViewController.swift */; };
 		F29DCB3819DA8B2400A53F05 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DCB3719DA8B2400A53F05 /* TweetViewController.swift */; };
 		F29DCB3A19DA958A00A53F05 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DCB3919DA958A00A53F05 /* ReplyViewController.swift */; };
+		F2A7F92619E337B300FF64B6 /* DrawerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7F92519E337B300FF64B6 /* DrawerMenuViewController.swift */; };
+		F2A7F92819E3496B00FF64B6 /* DrawerMenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7F92719E3496B00FF64B6 /* DrawerMenuItemCell.swift */; };
+		F2A7F92A19E34F1600FF64B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7F92919E34F1600FF64B6 /* ProfileViewController.swift */; };
+		F2A7F95A19E3C22500FF64B6 /* ProfileStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7F95919E3C22400FF64B6 /* ProfileStatsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		F29DCB3519DA7E9500A53F05 /* NewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		F29DCB3719DA8B2400A53F05 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		F29DCB3919DA958A00A53F05 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		F2A7F92519E337B300FF64B6 /* DrawerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerMenuViewController.swift; sourceTree = "<group>"; };
+		F2A7F92719E3496B00FF64B6 /* DrawerMenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerMenuItemCell.swift; sourceTree = "<group>"; };
+		F2A7F92919E34F1600FF64B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F2A7F95919E3C22400FF64B6 /* ProfileStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStatsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +181,8 @@
 				F29DCB3519DA7E9500A53F05 /* NewTweetViewController.swift */,
 				F29DCB3719DA8B2400A53F05 /* TweetViewController.swift */,
 				F29DCB3919DA958A00A53F05 /* ReplyViewController.swift */,
+				F2A7F92519E337B300FF64B6 /* DrawerMenuViewController.swift */,
+				F2A7F92919E34F1600FF64B6 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -181,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				F2577DDE19DA17160012CEA1 /* TweetCell.swift */,
+				F2A7F92719E3496B00FF64B6 /* DrawerMenuItemCell.swift */,
+				F2A7F95919E3C22400FF64B6 /* ProfileStatsCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -333,11 +345,15 @@
 				F29DCB3A19DA958A00A53F05 /* ReplyViewController.swift in Sources */,
 				F29DCB3619DA7E9500A53F05 /* NewTweetViewController.swift in Sources */,
 				F29DCB3819DA8B2400A53F05 /* TweetViewController.swift in Sources */,
+				F2A7F92819E3496B00FF64B6 /* DrawerMenuItemCell.swift in Sources */,
 				F2577DDF19DA17160012CEA1 /* TweetCell.swift in Sources */,
 				F2577DDB19D942F60012CEA1 /* Tweet.swift in Sources */,
+				F2A7F95A19E3C22500FF64B6 /* ProfileStatsCell.swift in Sources */,
 				F2577DDD19D94BD90012CEA1 /* TweetsViewController.swift in Sources */,
 				F2577DD219D914290012CEA1 /* TwitterClient.swift in Sources */,
 				F2577DAE19D911EB0012CEA1 /* AppDelegate.swift in Sources */,
+				F2A7F92A19E34F1600FF64B6 /* ProfileViewController.swift in Sources */,
+				F2A7F92619E337B300FF64B6 /* DrawerMenuViewController.swift in Sources */,
 				F2577DD619D916DA0012CEA1 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
