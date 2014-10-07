@@ -1,18 +1,16 @@
 # Twitter App Demo
 
-Twitter App for CodePath Assignment #3
+Twitter App for CodePath Assignment #4
 
-Hours taken: 10 hours
-Completed stories: All required stories, plus some optional stories
- * [x] Required: User can sign in using OAuth login flow
- * [x] Required: User can view last 20 tweets from their home timeline
- * [x] Required: The current signed in user will be persisted across restarts
- * [x] Required: In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp
- * [x] Required: User can pull to refresh
- * [x] Required: User can compose a new tweet by tapping on a compose button
- * [x] Required: User can tap on a tweet to view it, with controls to retweet, favorite, and reply
- * [x] Optional: User should be able to unfavorite
- * [x] Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet
+Hours taken: 8 hours
+Completed stories: All required stories
+ * [x] Required: Dragging anywhere in the view should reveal the hamburger menu.
+ * [x] Required: The menu should include links to your profile, the home timeline, and the mentions view.
+ * [x] Required: The menu can look similar to the LinkedIn menu
+ * [x] Required: The profile page contains the user header view
+ * [x] Required: The profile page contains a section with the users basic stats: # tweets, # following, # followers
+ * [x] Required: The profile page contains list of my recent tweets
+ * [x] Required: Tapping on a user image in the home timeline brings up that user's profile page
  
 Walkthrough of all user stories:
 
