@@ -21,10 +21,12 @@ class DrawerMenuViewController: UIViewController, UITableViewDataSource, UITable
         ],
         "mentions": [
             "name": "Mentions"
+        ],
+        "logout": [
+            "name": "Sign Out"
         ]
-
     ]
-    var menuItemOrder = ["profile", "home_timeline", "mentions"]
+    var menuItemOrder = ["profile", "home_timeline", "mentions", "logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +69,9 @@ class DrawerMenuViewController: UIViewController, UITableViewDataSource, UITable
                 tweetsViewController.tweetsFilter = .Mentions
                 tweetsViewController.navigationItem.title = "Mentions"
                 self.mm_drawerController.setCenterViewController(tweetsNavigationController, withFullCloseAnimation: true, completion: nil)
-            default:
+            case "logout":
+                User.currentUser?.logout()
+        default:
                 break
         }
     }
