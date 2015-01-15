@@ -127,12 +127,12 @@
 		F2577DAA19D911EB0012CEA1 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				F2577DB119D911EB0012CEA1 /* Main.storyboard */,
+				F2577DAD19D911EB0012CEA1 /* AppDelegate.swift */,
 				F2577DD019D913D40012CEA1 /* API */,
 				F2577DD719D942BE0012CEA1 /* Models */,
 				F2577DD419D916C00012CEA1 /* Views */,
 				F2577DD319D916B60012CEA1 /* ViewControllers */,
-				F2577DAD19D911EB0012CEA1 /* AppDelegate.swift */,
-				F2577DB119D911EB0012CEA1 /* Main.storyboard */,
 				F2577DB419D911EB0012CEA1 /* Images.xcassets */,
 				F2577DB619D911EB0012CEA1 /* LaunchScreen.xib */,
 				F2577DAB19D911EB0012CEA1 /* Supporting Files */,

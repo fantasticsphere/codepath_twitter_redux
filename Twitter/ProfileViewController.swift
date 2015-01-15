@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch ProfileSection.fromRaw(section)! {
+        switch ProfileSection(rawValue: section)! {
         case .Stats:
             return 1
         case .Tweets:
@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch ProfileSection.fromRaw(indexPath.section)! {
+        switch ProfileSection(rawValue: indexPath.section)! {
         case .Stats:
             var cell = tableView.dequeueReusableCellWithIdentifier("ProfileStatsCell") as ProfileStatsCell
             cell.statusesCountLabel.text = "\(self.user!.statusesCount!)"

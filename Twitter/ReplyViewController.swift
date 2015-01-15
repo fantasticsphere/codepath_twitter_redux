@@ -35,7 +35,7 @@ class ReplyViewController: UIViewController {
     
     @IBAction func doSend(sender: AnyObject) {
         if !replyTextView.text.isEmpty {
-            TwitterClient.sharedInstance.updateWithParams(["status": replyTextView.text, "in_reply_to_status_id": self.originalTweet!.statusId], completion: { (tweet, error) -> () in
+            TwitterClient.sharedInstance.updateWithParams(["status": replyTextView.text, "in_reply_to_status_id": self.originalTweet!.statusId!], completion: { (tweet, error) -> () in
                 if tweet != nil {
                     println("Replied: \(tweet)")
                 }
